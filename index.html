@@ -50,6 +50,8 @@
             border-radius: 50px;
             background-color: #C9E3D9;
             color: white;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
         }
         button:hover {
             background-color: #A9C3B9;
@@ -87,6 +89,11 @@
         const output = document.getElementById('output');
         const beepSound = document.getElementById('beepSound');
 
+        const CONTENT = `Details about this Thingy tag:
+line 1 words
+line 2 words
+line 3 words`
+
         // Check for NFC support
         if ('NDEFReader' in window) {
             scanButton.addEventListener('click', async () => {
@@ -102,9 +109,9 @@
                             if (record.recordType === 'text') {
                                 const textDecoder = new TextDecoder(record.encoding);
                                 const content = textDecoder.decode(record.data);
-                                output.textContent = `NFC Tag Content: ${content}`;
+                                output.textContent = CONTENT;
                             } else {
-                                output.textContent = 'Non-text NFC tag detected.';
+                                output.textContent = CONTENT;
                             }
                         }
                     };
