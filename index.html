@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="manifest.json">
-
     <title>Thingy</title>
     <style>
         body {
@@ -12,47 +10,73 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             height: 100vh;
             margin: 0;
             background-color: #f4f4f9;
+            position: relative;
+            padding-top: 60px;
         }
         h1 {
+            position: absolute;
+            top: 10px;
+            left: 20px;
             color: #333;
+            margin: 0;
+        }
+        #username {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: #333;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+        #username::after {
+            content: '\25BC'; /* Downward arrow symbol */
+            margin-left: 8px;
+            font-size: 14px;
         }
         button {
-            padding: 10px 20px;
-            font-size: 16px;
-            margin: 10px;
+            padding: 25px 50px;
+            font-size: 22px;
+            margin: 10px 0;
             cursor: pointer;
             border: none;
-            border-radius: 5px;
-            background-color: #007BFF;
+            border-radius: 50px;
+            background-color: #98FF98;
             color: white;
         }
         button:disabled {
             background-color: #cccccc;
         }
         #output {
-            margin-top: 20px;
+            margin-top: 10px;
             padding: 15px;
             border: 1px solid #ddd;
             border-radius: 5px;
             background-color: #fff;
-            width: 80%;
-            max-width: 400px;
+            width: 90%;
+            max-width: 500px;
+            height: 60vh;
             text-align: center;
+            overflow-y: auto;
         }
     </style>
 </head>
 <body>
     <h1>Thingy</h1>
-    <button id="scanButton">Scan NFC Tag</button>
-    <div id="output">No NFC tag scanned yet.</div>
+    <div id="username">Kathy</div>
+    <button id="scanButton">Scan Thingy Tag</button>
+    <div id="output">Thingy info will show up here.</div>
+
+    <audio id="beepSound" src="https://www.soundjay.com/button/beep-07.mp3" preload="auto"></audio>
 
     <script>
         const scanButton = document.getElementById('scanButton');
         const output = document.getElementById('output');
+        const beepSound = document.getElementById('beepSound');
 
         // Check for NFC support
         if ('NDEFReader' in window) {
@@ -63,6 +87,7 @@
                     output.textContent = 'Scanning for NFC tags...';
 
                     ndef.onreading = event => {
+                        beepSound.play();
                         const message = event.message;
                         for (const record of message.records) {
                             if (record.recordType === 'text') {
