@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFC Reader App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+        }
+        button:disabled {
+            background-color: #cccccc;
+        }
+        #output {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>NFC Reader App</h1>
+    <button id="scanButton">Scan NFC Tag</button>
+    <div id="output">No NFC tag scanned yet.</div>
+
+    <script>
+        const scanButton = document.getElementById('scanButton');
+        const output = document.getElementById('output');
+
+        // Check for NFC support
+        if ('NDEFReader' in window) {
+            scanButton.addEventListener('click', async () => {
+                try {
+                    const ndef = new NDEFReader();
+                    await ndef.scan();
+                    output.textContent = 'Scanning for NFC tags...';
+
+                    ndef.onreading = event => {
+                        const message = event.message;
+                        for (const record of message.records) {
+                            if (record.recordType === 'text') {
+                                const textDecoder = new TextDecoder(record.encoding);
+                                const content = textDecoder.decode(record.data);
+                                output.textContent = `NFC Tag Content: ${content}`;
+                            } else {
+                                output.textContent = 'Non-text NFC tag detected.';
+                            }
+                        }
+                    };
+
+                    ndef.onreadingerror = () => {
+                        output.textContent = 'Failed to read NFC tag.';
+                    };
+                } catch (error) {
+                    output.textContent = `Error: ${error.message}`;
+                }
+            });
+        } else {
+            scanButton.disabled = true;
+            output.textContent = 'NFC is not supported on this device.';
+        }
+    </script>
+</body>
+</html>
