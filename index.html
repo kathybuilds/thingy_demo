@@ -71,7 +71,7 @@
             width: 90%;
             max-width: 500px;
             height: 60vh;
-            text-align: center;
+            text-align: left;
             overflow-y: auto;
         }
     </style>
@@ -89,9 +89,9 @@
         const output = document.getElementById('output');
         const beepSound = document.getElementById('beepSound');
 
-        const CONTENT = `Details about this Thingy tag:
-line 1 words
-line 2 words
+        const CONTENT = `Details about this Thingy tag:<br>
+line 1 words<br>
+line 2 words<br>
 line 3 words`
 
         // Check for NFC support
@@ -100,7 +100,7 @@ line 3 words`
                 try {
                     const ndef = new NDEFReader();
                     await ndef.scan();
-                    output.textContent = 'Scanning for NFC tags...';
+                    output.innerHTML = 'Scanning for NFC tags...';
 
                     ndef.onreading = event => {
                         beepSound.play();
@@ -109,23 +109,24 @@ line 3 words`
                             if (record.recordType === 'text') {
                                 const textDecoder = new TextDecoder(record.encoding);
                                 const content = textDecoder.decode(record.data);
-                                output.textContent = CONTENT;
+                                output.innerHTML = CONTENT;
                             } else {
-                                output.textContent = CONTENT;
+                                output.innerHTML = CONTENT;
                             }
                         }
                     };
 
                     ndef.onreadingerror = () => {
-                        output.textContent = 'Failed to read NFC tag.';
+                        output.innerHTML = 'Failed to read NFC tag.';
                     };
                 } catch (error) {
-                    output.textContent = `Error: ${error.message}`;
+                    output.innerHTML = `Error: ${error.message}`;
                 }
             });
         } else {
-            scanButton.disabled = true;
-            output.textContent = 'NFC is not supported on this device.';
+            // scanButton.disabled = true;
+            // output.innerHTML = 'NFC is not supported on this device.';
+            output.innerHTML = CONTENT;
         }
     </script>
 </body>
