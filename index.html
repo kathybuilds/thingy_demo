@@ -36,20 +36,27 @@
         #username::after {
             content: '\25BC'; /* Downward arrow symbol */
             margin-left: 8px;
-            font-size: 14px;
+            font-size: 18px;
         }
         button {
             padding: 25px 50px;
             font-size: 22px;
+            font-weight: bolder;
             margin: 10px 0;
             cursor: pointer;
             border: none;
             border-radius: 50px;
-            background-color: #98FF98;
+            background-color: #C9E3D9;
             color: white;
         }
+        button:hover {
+            background-color: #A9C3B9;
+        }
+        button:active {
+            background-color: #89A399;
+        }
         button:disabled {
-            background-color: #cccccc;
+            background-color: #C9E3D9;
         }
         #output {
             margin-top: 10px;
@@ -71,7 +78,7 @@
     <button id="scanButton">Scan Thingy Tag</button>
     <div id="output">Thingy info will show up here.</div>
 
-    <audio id="beepSound" src="https://www.soundjay.com/button/beep-07.mp3" preload="auto"></audio>
+    <audio id="beepSound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto"></audio>
 
     <script>
         const scanButton = document.getElementById('scanButton');
