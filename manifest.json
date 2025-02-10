@@ -3,12 +3,12 @@
   "short_name": "Thingy",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "description": "Organize everything in your universe",
+  "background_color": "#f4f4f9",
+  "theme_color": "#C9E3D9",
   "icons": [
     {
-      "src": "icon.png",
-      "sizes": "192x192",
+      "src": "favicon.png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]
