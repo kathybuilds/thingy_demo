@@ -68,7 +68,7 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             background-color: #fff;
-            width: 90%;
+            width: 80%;
             max-width: 500px;
             height: 60vh;
             text-align: left;
@@ -103,13 +103,15 @@ line 3 words`
                     output.innerHTML = 'Scanning for NFC tags...';
 
                     ndef.onreading = event => {
-                        beepSound.play();
+                        // beepSound.play();
                         const message = event.message;
                         for (const record of message.records) {
                             if (record.recordType === 'text') {
                                 const textDecoder = new TextDecoder(record.encoding);
                                 const content = textDecoder.decode(record.data);
-                                output.innerHTML = CONTENT;
+                                
+                                // output.innerHTML = CONTENT;
+                                output.innerHTML = `${content}`;
                             } else {
                                 output.innerHTML = CONTENT;
                             }
