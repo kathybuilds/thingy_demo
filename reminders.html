@@ -78,14 +78,23 @@
             line-height: 1.5;
             font-size: 18px;
         }
+        #small {
+            color: #888888;
+        }
     </style>
 </head>
 <body>
     <h1 onclick="window.location.href='/'" style="cursor: pointer;">Thingy</h1>
     <div id="username">Kathy</div>
     <button id="scanButton">Reminders</button>
-    <div id="output">Thingy info will show up here.</div>
-    <div id="output">Thingy info will show up here.</div>
+    <div id="output">
+        Vitamin C (for <u>Aiden</u>) is expiring tomorrow.<br><br>
+        <small id="small">18 minutes ago</small>
+    </div>
+    <div id="output">
+        <u>Caleb</u>'s for you will become visible in 2 days.<br><br>
+        <small id="small">22 minutes ago</small>
+    </div>
 
 </body>
 </html>
