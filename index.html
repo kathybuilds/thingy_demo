@@ -5,30 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#C9E3D9">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&display=swap" rel="stylesheet">
     <title>Thingy</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            /* font-family: Arial, sans-serif; */
+            font-family: 'Be Vietnam Pro', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
             height: 100vh;
-            margin: 0;
+            /* margin: 0; */
             background-color: #f4f4f9;
             position: relative;
-            padding-top: 60px;
+            padding-top: 90px;
         }
         h1 {
             position: absolute;
-            top: 10px;
+            top: 30px;
             left: 20px;
             color: #333;
             margin: 0;
         }
         #username {
             position: absolute;
-            top: 10px;
+            top: 33px;
             right: 20px;
             color: #333;
             font-size: 18px;
@@ -79,10 +81,12 @@
     </style>
 </head>
 <body>
+    <div id="spacer">  </div>
     <h1 onclick="window.location.href='/'" style="cursor: pointer;">Thingy</h1>
-    <div id="username" onclick="window.location.href='./reminders'" style="cursor: pointer;">Kathy</div>
+    <div id="username" onclick="window.location.href='./reminders'" style="cursor: pointer;">[Your Name]</div>
     <button id="scanButton">Scan Thingy Tag</button>
     <div id="output">Thingy info will show up here.</div>
+    <!-- <textarea id="output">Thingy info will show up here.</textarea> -->
 
     <audio id="beepSound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto"></audio>
 
